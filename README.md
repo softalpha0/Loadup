@@ -122,7 +122,11 @@ npm run db:migrate
 npm run dev -- --host
 ```
 
-The API runs on `:8787`, the Mini App on `:5173` (proxying `/api`). In Nimiq Pay: **Mini Apps → Custom URL →** the Network URL from your terminal (e.g. `http://192.168.1.42:5173`).
+The API runs on `:8787`, the Mini App on `:5173` (proxying `/api`). On first start the API needs ~10 s to create the local database — `[vite] http proxy error … ECONNREFUSED` lines before `[api] [loadup] API on …` appears are harmless.
+
+In Nimiq Pay: **Mini Apps → Custom URL →** the Wi-Fi "Network" URL from your terminal (e.g. `http://192.168.1.42:5173`). Opening the app in a desktop browser shows the "Open in Nimiq Pay" page by design. On Windows, allow Node.js through the firewall for private networks if the phone can't connect.
+
+`.env` is read automatically at startup; real environment variables take precedence.
 
 Without a Bitrefill key, set `TOPUP_PROVIDER=mock` to click through every flow with a fake catalogue (invoices from the mock cannot be paid by a real wallet).
 
@@ -140,10 +144,10 @@ One Node process serves the API and the built Mini App from one stable URL:
 
 ```bash
 npm ci && npm run build
-NODE_ENV=production npm start
+npm start          # with NODE_ENV=production set in the host's environment
 ```
 
-A `Dockerfile` is included (Render, Fly.io, Railway, any VPS). Migrations run on startup. Point Bitrefill webhooks at `https://<domain>/api/webhooks/bitrefill` — they are only used as a trigger; state is always re-fetched with `GET /invoices/{id}`.
+A `Dockerfile` is included (Render, Fly.io, Railway, any VPS). Migrations run on startup. The `https://nimpay.app/miniapps/open/<domain>` deep link only works once Loadup is listed in the Nimiq Pay Mini Apps directory (open-source catalog — submit a PR there); until then users open it via **Mini Apps → Custom URL**. Point Bitrefill webhooks at `https://<domain>/api/webhooks/bitrefill` — they are only used as a trigger; state is always re-fetched with `GET /invoices/{id}`.
 
 ## Project layout
 

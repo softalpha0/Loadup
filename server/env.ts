@@ -1,4 +1,10 @@
+import { existsSync } from 'node:fs'
 import { z } from 'zod'
+
+// Load .env (Node ≥ 20.12 built-in). Real environment variables always win.
+if (existsSync('.env')) {
+  try { process.loadEnvFile('.env') } catch (e) { console.warn('[loadup] could not read .env:', (e as Error).message) }
+}
 
 const schema = z.object({
   NODE_ENV: z.string().default('development'),

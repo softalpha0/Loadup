@@ -3,8 +3,8 @@ import { test, expect, installWallet, signIn, setPayMode } from './fixtures'
 test('browser fallback outside Nimiq Pay (F22)', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('heading', { name: 'Open Loadup in Nimiq Pay' })).toBeVisible()
-  const href = await page.getByRole('link', { name: 'Open in Nimiq Pay' }).getAttribute('href')
-  expect(href).toBe('https://nimpay.app/miniapps/open/localhost:8799')
+  // On localhost the directory deep link cannot work → Custom URL instructions instead
+  await expect(page.getByText(/You are running Loadup locally/)).toBeVisible()
 })
 
 test('testnet shows the mainnet-required screen (A10)', async ({ context, page }) => {

@@ -1,7 +1,7 @@
 {
   "name": "loadup",
   "version": "1.0.0",
-  "description": "Top up any phone, buy data or a travel eSIM — paid with NIM or USDT inside Nimiq Pay.",
+  "description": "Top up any phone, buy data or a travel eSIM \u2014 paid with NIM or USDT inside Nimiq Pay.",
   "license": "MIT",
   "author": "softalpha0",
   "type": "module",
@@ -14,7 +14,7 @@
     "dev:api": "tsx watch server/index.ts",
     "dev:web": "vite",
     "build": "vite build",
-    "start": "NODE_ENV=production tsx server/index.ts",
+    "start": "tsx server/index.ts",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx server/db/migrate.ts",

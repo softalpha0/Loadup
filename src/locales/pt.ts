@@ -146,6 +146,8 @@ const pt: Dict = {
     title: 'Mude o Nimiq Pay para a mainnet', body: 'Pagamentos Lightning só funcionam na mainnet. Abra as configurações do Nimiq Pay, mude a rede para mainnet e reabra a Loadup.',
   },
   fallback: {
+    customUrl: 'Ou no Nimiq Pay: Mini Apps → URL personalizada → digite este endereço:',
+    local: 'Você está rodando a Loadup localmente. Abra no celular pelo Nimiq Pay: Mini Apps → URL personalizada → digite a URL “Network” do terminal (celular e computador no mesmo Wi-Fi).',
     title: 'Abra a Loadup no Nimiq Pay', body: 'A Loadup é um Mini App do Nimiq Pay. Recarregue celulares, compre dados, eSIMs e gift cards com NIM ou USDT — dentro da sua carteira.',
     open: 'Abrir no Nimiq Pay', get: 'Ainda não tem o Nimiq Pay?', ios: 'App Store', android: 'Google Play',
     steps: ['Instale o Nimiq Pay', 'Toque no botão acima (ou abra Mini Apps → Loadup)', 'Recarregue em três toques'],

@@ -7,16 +7,23 @@ import { Link } from 'react-router-dom'
 export function BrowserFallback() {
   const { t, dict } = useI18n()
   const links = deepLinks(window.location.href)
+  const host = window.location.hostname
+  const isLocal = host === 'localhost' || /^(127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(host)
   return (
     <div className="min-h-full bg-app">
       <div className="mx-auto max-w-lg px-6 py-12 text-center">
         <div className="mx-auto h-20 w-20 rounded-3xl bg-brand-600 text-white grid place-items-center shadow-lg"><IconBolt size={40} /></div>
         <h1 className="mt-6 text-3xl font-bold">{t('fallback.title')}</h1>
         <p className="mt-3 text-muted text-lg">{t('fallback.body')}</p>
-        <div className="mt-8 space-y-3">
-          <a href={links.universal}><Button>{t('fallback.open')}</Button></a>
-          <a href={links.scheme} className="block text-sm text-muted underline">nimiqpay://</a>
-        </div>
+        {isLocal ? (
+          <div className="mt-8 rounded-2xl bg-amber-500/10 text-amber-900 dark:text-amber-100 p-4 text-left">{t('fallback.local')}</div>
+        ) : (
+          <div className="mt-8 space-y-3">
+            <a href={links.universal}><Button>{t('fallback.open')}</Button></a>
+            <p className="text-sm text-muted">{t('fallback.customUrl')}</p>
+            <code className="block break-all rounded-xl bg-surface border border-app px-3 py-2 text-sm">{window.location.origin}</code>
+          </div>
+        )}
         <ol className="mt-10 text-left space-y-3">
           {dict.fallback.steps.map((s, i) => (
             <li key={i} className="flex gap-3 items-start">
